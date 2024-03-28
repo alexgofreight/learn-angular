@@ -1,0 +1,8 @@
+.delete li {
+  text-decoration: line-through;
+}
+
+.del {
+  text-decoration: line-through;
+  color: gray;
+}

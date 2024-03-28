@@ -1,0 +1,36 @@
+<section>
+  <header class="header">
+    <h1>{{title}}</h1>
+    <input type="text" placeholder="{{placeholder}}" [value]="inputValue" autofocus>
+    <button type="button" (click)="print($event)">印出</button>
+  </header>
+  <div>
+    <h3>1.</h3>
+    <input type="checkbox" id="toggle-all" (click)="doToggleAll()" [checked]="toggleAll">
+    <label for="toggle-all">Toggle All</label>
+    <ul [class]="classUl">
+      <li *ngFor="let item of itemList">
+        <input type="checkbox" [id]="item.id" [checked]="item.check">
+        <label [for]="item.id">{{item.name}}</label>
+      </li>
+    </ul>
+  </div>
+  <div>
+    <h3>2.</h3>
+    <ul>
+      <li *ngFor="let item of nbaList" [class.del]="item.check">
+        <input type="checkbox" [id]="item.id" [checked]="item.check" (click)="clickCheck(item)">
+        <label [for]="item.id">{{item.name}}</label>
+      </li>
+    </ul>
+  </div>
+  <div>
+    <h3>3.</h3>
+    <ul>
+      <li *ngFor="let item of nbaList" [class]="{del: item.check}">
+        <input type="checkbox" [id]="item.id" [checked]="item.check" (click)="clickCheck(item)">
+        <label [for]="item.id">{{item.name}}</label>
+      </li>
+    </ul>
+  </div>
+</section>
