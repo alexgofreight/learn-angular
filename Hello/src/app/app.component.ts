@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import $ from 'jquery'
+import * as _ from 'lodash-es'
 
 @Component({
   selector: 'app-root',
@@ -14,6 +16,9 @@ export class AppComponent implements OnInit{
     this.myModal = new bootstrap.Modal('#exampleModal', {
       keyboard: false
     })
+
+    $('#jq-demo').append('<b>Hi jQuery</b>')
+    _.isEmpty(null)
   }
 
   openModal(): void {
