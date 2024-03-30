@@ -10,8 +10,17 @@
     <label for="toggle-all">Toggle All</label>
     <ul [class]="classUl">
       <li *ngFor="let item of itemList">
-        <input type="checkbox" [id]="item.id" [checked]="item.check">
-        <label [for]="item.id">{{item.name}}</label>
+        <div class="view" *ngIf="!item.editing">
+          <input type="checkbox" [checked]="item.check">
+          <label (dblclick)="edit(item)">{{item.name}}</label>
+        </div>
+        <input type="text" class="edit" #editInput
+          *ngIf="item.editing" 
+          [value]="item.name" 
+          (keyup.enter)="update(item, editInput.value)"
+          (mouseenter)="editInput.focus()"
+          (blur)="update(item, editInput.value)"
+          />
       </li>
     </ul>
   </div>

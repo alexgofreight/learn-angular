@@ -17,41 +17,57 @@ export class AppComponent {
   itemList: TodoItem[] = [{
     name: 'Bus',
     id: 1,
-    check: false
+    check: false,
+    editing: false
   }, {
     name: 'Fly',
     id: 2,
-    check: false
+    check: false,
+    editing: false
   }, {
     name: 'Car',
     id: 3,
-    check: false
+    check: false,
+    editing: false
   }]
 
   // Test 2
   nbaList: TodoItem[] = [{
     name: 'Jordan',
     id: 1,
-    check: false
+    check: false,
+    editing: false
   }, {
     name: 'Kobe',
     id: 2,
-    check: true
+    check: true,
+    editing: false
   }, {
     name: 'James',
     id: 3,
-    check: false
+    check: false,
+    editing: false
   }]
 
   xxx = true
 
-  add(item: string) {
+  add(input: string) {
     const todo: TodoItem = {
-      name: item,
+      name: input,
       id: this.itemList.length,
-      check: false
+      check: false,
+      editing: false
     }
     this.itemList.push(todo)
+  }
+
+  edit(item: TodoItem) {
+    item.editing = true;
+  }
+
+  update(item: TodoItem, editValue: string) {
+    item.name = editValue;
+    item.editing = false;
   }
 
   print(event: MouseEvent) {
