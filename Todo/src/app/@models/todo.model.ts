@@ -4,3 +4,9 @@ export interface TodoItem {
   check: boolean;
   editing: boolean;
 }
+
+export enum TodoStatusType {
+  All,
+  Active,
+  Completed
+}

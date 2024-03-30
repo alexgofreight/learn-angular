@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { TodoItem } from './@models/todo.model';
+import { TodoItem, TodoStatusType } from './@models/todo.model';
 
 @Component({
   selector: 'app-root',
@@ -13,6 +13,9 @@ export class AppComponent {
 
   toggleAll = false
   classUl = ''
+
+  currentTodoStatus = TodoStatusType.All
+  TodoStatusType = TodoStatusType
 
   itemList: TodoItem[] = [{
     name: 'Bus',
@@ -48,8 +51,6 @@ export class AppComponent {
     check: false,
     editing: false
   }]
-
-  xxx = true
 
   add(input: string) {
     const todo: TodoItem = {
@@ -90,5 +91,33 @@ export class AppComponent {
 
   clickCheck(item: TodoItem) {
     item.check = !item.check
+  }
+
+  setTodoStatusType(type: number) {
+    this.currentTodoStatus = type
+  }
+
+  get currentTodoListByStatus() {
+    switch (this.currentTodoStatus) {
+      case TodoStatusType.Active:
+        return this.todoActive
+      case TodoStatusType.Completed:
+        return this.todoCompleted
+      case TodoStatusType.All:
+      default:
+        return this.todoAll
+    }
+  }
+
+  get todoAll() {
+    return this.itemList
+  }
+
+  get todoActive() {
+    return this.itemList.filter((item) => !item.check)
+  }
+
+  get todoCompleted() {
+    return this.itemList.filter((item) => item.check)
   }
 }

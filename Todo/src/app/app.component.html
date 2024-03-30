@@ -9,9 +9,9 @@
     <input type="checkbox" id="toggle-all" (click)="doToggleAll()" [checked]="toggleAll">
     <label for="toggle-all">Toggle All</label>
     <ul [class]="classUl">
-      <li *ngFor="let item of itemList">
+      <li *ngFor="let item of currentTodoListByStatus">
         <div class="view" *ngIf="!item.editing">
-          <input type="checkbox" [checked]="item.check">
+          <input type="checkbox" [checked]="item.check" (click)="item.check=!item.check">
           <label (dblclick)="edit(item)">{{item.name}}</label>
         </div>
         <input type="text" class="edit" #editInput
@@ -39,6 +39,22 @@
       <li *ngFor="let item of nbaList" [class]="{del: item.check}">
         <input type="checkbox" [id]="item.id" [checked]="item.check" (click)="clickCheck(item)">
         <label [for]="item.id">{{item.name}}</label>
+      </li>
+    </ul>
+  </div>
+  <div>
+    <ul class="footer">
+      <li>
+        <a href="javascript:;" [class.selected]="currentTodoStatus === TodoStatusType.All" 
+        (click)="setTodoStatusType(TodoStatusType.All)">All</a>
+      </li>
+      <li>
+        <a href="javascript:;" [class.selected]="currentTodoStatus === TodoStatusType.Active"
+        (click)="setTodoStatusType(TodoStatusType.Active)">Active</a>
+      </li>
+      <li>
+        <a href="javascript:;" [class.selected]="currentTodoStatus === TodoStatusType.Completed"
+        (click)="setTodoStatusType(TodoStatusType.Completed)">Completed</a>
       </li>
     </ul>
   </div>
