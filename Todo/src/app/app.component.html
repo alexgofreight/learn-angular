@@ -1,7 +1,7 @@
 <section>
   <header class="header">
     <h1>{{title}}</h1>
-    <input type="text" placeholder="{{placeholder}}" [value]="inputValue" autofocus>
+    <input type="text" #todoInput placeholder="{{placeholder}}" [value]="inputValue" (keyup.enter)="add(todoInput.value); todoInput.value=''" autofocus>
     <button type="button" (click)="print($event)">印出</button>
   </header>
   <div>

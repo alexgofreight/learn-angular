@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { TodoItem } from './@models/todo.model';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ export class AppComponent {
   toggleAll = false
   classUl = ''
 
-  itemList = [{
+  itemList: TodoItem[] = [{
     name: 'Bus',
     id: 1,
     check: false
@@ -28,7 +29,7 @@ export class AppComponent {
   }]
 
   // Test 2
-  nbaList = [{
+  nbaList: TodoItem[] = [{
     name: 'Jordan',
     id: 1,
     check: false
@@ -43,6 +44,15 @@ export class AppComponent {
   }]
 
   xxx = true
+
+  add(item: string) {
+    const todo: TodoItem = {
+      name: item,
+      id: this.itemList.length,
+      check: false
+    }
+    this.itemList.push(todo)
+  }
 
   print(event: MouseEvent) {
     console.log(event)
@@ -62,7 +72,7 @@ export class AppComponent {
     }
   }
 
-  clickCheck(item: any) {
+  clickCheck(item: TodoItem) {
     item.check = !item.check
   }
 }
