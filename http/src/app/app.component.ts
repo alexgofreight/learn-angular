@@ -30,11 +30,17 @@ export class AppComponent implements OnInit{
       Editing: false,
       Thing: this.inputValue,
       Status: false,
+      TodoId: ''
     }
     this.http.post<TodoBE>('/api/todo2_16', todo).subscribe((data)=>{
       this.todoList.push(data)  // 需跟後端溝通好
     })
     // this.getData 會需要多一隻 API 取
     this.inputValue = ''
+  }
+
+  update(todo: TodoBE) {
+    this.http.put('/api/todo2_16/' + todo.TodoId, todo).subscribe()
+    todo.Editing = false
   }
 }

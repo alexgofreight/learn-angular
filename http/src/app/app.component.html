@@ -8,7 +8,13 @@
   
   <div>
     <ul *ngFor="let todo of todoList">
-      <li>{{ todo.Thing }}</li>
+      <li (dblclick)="todo.Editing=true" *ngIf="!todo.Editing">{{ todo.Thing }}</li>
+      <input type="text" #updateInput 
+        [(ngModel)]="todo.Thing" 
+        *ngIf="todo.Editing" 
+        (mouseenter)="updateInput.focus()"
+        (keyup.enter)="update(todo)"
+        (blur)="update(todo)">
     </ul>
   </div>
 </div>
