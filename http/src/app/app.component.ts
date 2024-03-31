@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Todo, TodoBE } from './@models/todo.model';
 import { ExampleService } from './@services/example.service';
+import { TodoApiService } from './@services/todo-api.service';
 
 @Component({
   selector: 'app-root',
@@ -14,7 +15,8 @@ export class AppComponent implements OnInit{
 
   constructor(
     private http: HttpClient,
-    private exampleService: ExampleService
+    private exampleService: ExampleService,
+    private apiService: TodoApiService
   ) {
 
   }
@@ -24,7 +26,7 @@ export class AppComponent implements OnInit{
   }
 
   getData() {
-    this.http.get<TodoBE[]>('/api/todo2_16').subscribe(data=>{
+    this.apiService.getTodo().subscribe(data=>{
       this.todoList = data
     })
   }
@@ -36,7 +38,7 @@ export class AppComponent implements OnInit{
       Status: false,
       TodoId: ''
     }
-    this.http.post<TodoBE>('/api/todo2_16', todo).subscribe((data)=>{
+    this.apiService.addTodo(todo).subscribe((data)=>{
       this.todoList.push(data)  // 需跟後端溝通好
     })
     // this.getData 會需要多一隻 API 取
@@ -44,12 +46,12 @@ export class AppComponent implements OnInit{
   }
 
   update(todo: TodoBE) {
-    this.http.put('/api/todo2_16/' + todo.TodoId, todo).subscribe()
+    this.apiService.updateTodo(todo.TodoId, todo).subscribe()
     todo.Editing = false
   }
 
   delete(todo: TodoBE) {
-    this.http.delete('/api/todo2_16/' + todo.TodoId).subscribe()
+    this.apiService.deleteTodo(todo.TodoId).subscribe()
     this.todoList = this.todoList.filter(item=>item.TodoId !== todo.TodoId)
   }
 }
