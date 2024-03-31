@@ -6,8 +6,6 @@ export interface Todo {
 
 export interface TodoBE {
   Editing: boolean,
-  TodoId: string,
   Thing: string,
-  Status: boolean,
-  CreateTime: string
+  Status: boolean
 }

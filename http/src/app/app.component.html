@@ -1,1 +1,14 @@
 <h2>Hello Http</h2>
+
+<div>
+  <div>
+    <input type="text" [(ngModel)]="inputValue" (keyup.enter)="add()" />
+    <button (click)="add()">加入</button>
+  </div>
+  
+  <div>
+    <ul *ngFor="let todo of todoList">
+      <li>{{ todo.Thing }}</li>
+    </ul>
+  </div>
+</div>
