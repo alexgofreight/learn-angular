@@ -43,4 +43,9 @@ export class AppComponent implements OnInit{
     this.http.put('/api/todo2_16/' + todo.TodoId, todo).subscribe()
     todo.Editing = false
   }
+
+  delete(todo: TodoBE) {
+    this.http.delete('/api/todo2_16/' + todo.TodoId).subscribe()
+    this.todoList = this.todoList.filter(item=>item.TodoId !== todo.TodoId)
+  }
 }

@@ -8,7 +8,10 @@
   
   <div>
     <ul *ngFor="let todo of todoList">
-      <li (dblclick)="todo.Editing=true" *ngIf="!todo.Editing">{{ todo.Thing }}</li>
+      <li (dblclick)="todo.Editing=true" *ngIf="!todo.Editing">
+        <span>{{ todo.Thing }}</span>
+        <button type="button" class="delete" (click)="delete(todo)">x</button>
+      </li>
       <input type="text" #updateInput 
         [(ngModel)]="todo.Thing" 
         *ngIf="todo.Editing" 

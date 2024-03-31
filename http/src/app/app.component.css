@@ -1,0 +1,6 @@
+button.delete {
+  margin-left: 50px;
+  color:white;
+  background-color: red;
+  cursor: pointer;
+}
