@@ -3,3 +3,11 @@ export interface Todo {
   status: boolean,
   editing: boolean
 }
+
+export interface TodoBE {
+  Editing: boolean,
+  TodoId: string,
+  Thing: string,
+  Status: boolean,
+  CreateTime: string
+}
