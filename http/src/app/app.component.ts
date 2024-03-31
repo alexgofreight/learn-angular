@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Todo, TodoBE } from './@models/todo.model';
+import { ExampleService } from './@services/example.service';
 
 @Component({
   selector: 'app-root',
@@ -11,7 +12,10 @@ export class AppComponent implements OnInit{
   inputValue = ""
   todoList: TodoBE[] = []
 
-  constructor(private http: HttpClient) {
+  constructor(
+    private http: HttpClient,
+    private exampleService: ExampleService
+  ) {
 
   }
 
