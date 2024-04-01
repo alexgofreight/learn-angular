@@ -5,25 +5,40 @@
         Sign Up
       </h4>
     </div>
-    <div class="form-group">
-      <label for="username">Username</label>
-      <input type="text" 
-             [formControl]="username"
-             class="form-control"
-             id="username"
-             placeholder="Username">
-    </div>
-    <p>
-      Value: {{username.value}}
-    </p>
-    <p>
-      <button class="btn btn-success" type="submit">
-        <i class="fas fa-save"></i>Save
-      </button>
-      <button class="btn btn-warning" type="button" (click)="clear()">
-        <i class="fas fa-snowplow"></i>Clear
-      </button>
-    </p>
-  </div>
+    <form [formGroup]="userForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="username">Username</label>
+        <input type="text" 
+               formControlName="username"
+               class="form-control"
+               id="username"
+               placeholder="Username">
+      </div>
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="text" 
+               formControlName="password"
+               class="form-control"
+               id="password"
+               placeholder="Password">
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password</label>
+        <input type="text" 
+               formControlName="confirmPassword"
+               class="form-control"
+               id="confirmPassword"
+               placeholder="Confirm Password">
+      </div>
 
+      <p>
+        <button class="btn btn-success" type="submit">
+          <i class="fas fa-save"></i>Save
+        </button>
+        <button class="btn btn-warning" type="button" (click)="clear()">
+          <i class="fas fa-snowplow"></i>Clear
+        </button>
+      </p>
+    </form>
+  </div>
 </div>
