@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+// import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-sign-up',
@@ -7,7 +8,17 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrl: './sign-up.component.css'
 })
 export class SignUpComponent implements OnInit{
-  userForm: FormGroup;
+  userForm = this.fb.group({
+    username: [''],
+    password: [''],
+    confirmPassword: [''],
+    address: this.fb.group({
+      street: [''],
+      city: [''],
+      state: [''],
+      zip: ['']
+    })
+  })
   stateOptions: string[] = ['OI', 'OE', 'AI'];
   userAddressInfo: any = {
     street: 'ABC',
@@ -16,18 +27,7 @@ export class SignUpComponent implements OnInit{
     zip: 123
   }
 
-  constructor() {
-    this.userForm = new FormGroup({
-      username: new FormControl(""),
-      password: new FormControl(""),
-      confirmPassword: new FormControl(""),
-      address: new FormGroup({
-        street: new FormControl(""),
-        city: new FormControl(""),
-        state: new FormControl(""),
-        zip: new FormControl("")
-      })
-    });
+  constructor(private fb: FormBuilder) {
   }
 
   ngOnInit(): void {
