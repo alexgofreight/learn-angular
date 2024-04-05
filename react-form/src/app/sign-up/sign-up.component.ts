@@ -7,15 +7,26 @@ import { FormControl, FormGroup } from '@angular/forms';
   styleUrl: './sign-up.component.css'
 })
 export class SignUpComponent implements OnInit{
-  
-  
   userForm: FormGroup;
+  stateOptions: string[] = ['OI', 'OE', 'AI'];
+  userAddressInfo: any = {
+    street: 'ABC',
+    city: 'TP',
+    state: 'AI',
+    zip: 123
+  }
 
   constructor() {
     this.userForm = new FormGroup({
       username: new FormControl(""),
       password: new FormControl(""),
-      confirmPassword: new FormControl("")
+      confirmPassword: new FormControl(""),
+      address: new FormGroup({
+        street: new FormControl(""),
+        city: new FormControl(""),
+        state: new FormControl(""),
+        zip: new FormControl("")
+      })
     });
   }
 
@@ -25,6 +36,12 @@ export class SignUpComponent implements OnInit{
 
   clear() {
     this.userForm.reset();
+  }
+
+  autoFill() {
+    this.userForm.patchValue({
+      address: this.userAddressInfo
+    })
   }
 
   onSubmit() {
