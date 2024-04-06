@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-// import { FormControl, FormGroup } from '@angular/forms';
-import { FormBuilder, Validator, Validators } from '@angular/forms';
+// import { FormControl, FormGroup, Validator } from '@angular/forms';
+import { FormBuilder, Validators } from '@angular/forms';
+import { CustomValidationService } from '../services/custom-validation.service';
 
 @Component({
   selector: 'app-sign-up',
@@ -18,6 +19,8 @@ export class SignUpComponent implements OnInit{
       state: [''],
       zip: ['']
     })
+  }, {
+    validator: this.customValidator.passwordMatchValidator('password', 'confirmPassword')
   })
   stateOptions: string[] = ['OI', 'OE', 'AI'];
   userAddressInfo: any = {
@@ -27,8 +30,10 @@ export class SignUpComponent implements OnInit{
     zip: 123
   }
 
-  constructor(private fb: FormBuilder) {
-  }
+  constructor(
+    private fb: FormBuilder,
+    private customValidator: CustomValidationService
+  ) {}
 
   ngOnInit(): void {
     
