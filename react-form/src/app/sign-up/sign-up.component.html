@@ -11,11 +11,17 @@
         <input type="text" 
                formControlName="username"
                class="form-control"
-               [ngClass]="{'is-invalid': userForm.get('username')?.errors && userForm.get('username')?.touched}"
+               [ngClass]="{'is-invalid': username?.errors && username?.touched}"
                id="username"
                placeholder="Username">
-        <div class="invalid-feedback" *ngIf="userForm.get('username')?.hasError('usernameTaken')">
+        <div class="invalid-feedback" *ngIf="username?.hasError('usernameTaken')">
           Username is taken
+        </div>
+        <div class="invalid-feedback" *ngIf="username?.hasError('required')">
+          Username is required
+        </div>
+        <div class="invalid-feedback" *ngIf="username?.hasError('minlength')">
+          Username must be at least 3 characters
         </div>
       </div>
       <div class="form-group">
@@ -23,19 +29,26 @@
         <input type="text" 
                formControlName="password"
                class="form-control"
+               [ngClass]="{'is-invalid': password?.errors && password?.touched}"
                id="password"
                placeholder="Password">
+        <div class="invalid-feedback" *ngIf="password?.hasError('required')">
+          Password is required
+        </div>
       </div>
       <div class="form-group">
         <label for="confirmPassword">Confirm Password</label>
         <input type="text" 
                formControlName="confirmPassword"
                class="form-control"
-               [ngClass]="{'is-invalid': userForm.get('confirmPassword')?.errors && userForm.get('confirmPassword')?.touched}"
+               [ngClass]="{'is-invalid': confirmPassword?.errors && confirmPassword?.touched}"
                id="confirmPassword"
                placeholder="Confirm Password">
-        <div class="invalid-feedback" *ngIf="userForm.get('confirmPassword')?.hasError('passwordMismatch')">
+        <div class="invalid-feedback" *ngIf="confirmPassword?.hasError('passwordMismatch')">
           Passwords Don't Match
+        </div>
+        <div class="invalid-feedback" *ngIf="confirmPassword?.hasError('required')">
+          Confirm Password is required
         </div>
       </div>
       <section formGroupName="address">
@@ -87,7 +100,8 @@
       </p>
 
       <p>
-        <button class="btn btn-success" type="submit">
+        <button class="btn btn-success" [disabled]="userForm.invalid"
+          type="submit">
           <i class="fas fa-save"></i>Save
         </button>
         <button class="btn btn-warning" type="button" (click)="clear()">

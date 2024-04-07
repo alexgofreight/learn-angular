@@ -22,6 +22,19 @@ export class SignUpComponent implements OnInit{
   }, {
     validator: this.customValidator.passwordMatchValidator('password', 'confirmPassword')
   })
+
+  get username() {
+    return this.userForm.get('username');
+  }
+
+  get password() {
+    return this.userForm.get('password');
+  }
+
+  get confirmPassword() {
+    return this.userForm.get('confirmPassword');
+  }
+
   stateOptions: string[] = ['OI', 'OE', 'AI'];
   userAddressInfo: any = {
     street: 'ABC',
